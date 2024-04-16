@@ -1,0 +1,22 @@
+name: xash
+base: core20
+version: '1.0'
+grade: stable
+confinement: devmode
+summary: xash ported to snapcraft
+description: |
+  xash ported to snapcraft
+architectures: 
+  - build-on: amd64
+  - build-on: arm64
+  - build-on: armhf
+
+apps:
+  xash:
+    command: bin/xash3d
+
+parts:
+  xash:
+    source: https://github.com/FWGS/xash3d-fwgs.git
+    source-tag: continuous-uncrustify
+    plugin: python3
