@@ -31,5 +31,7 @@ parts:
     override-build: |
       # Override the build step to use the Waf build system
       cd $SNAPCRAFT_PART_SRC
+      sudo apt-get update
+      sudo apt-get install -y libsdl2-dev
       ./waf configure -T release
       ./waf build
