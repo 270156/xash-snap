@@ -1,8 +1,8 @@
 name: xash
 version: '1.0'
-summary: Xash3D FWGS Engine
+summary: xash ported to snap
 description: |
-  Xash3D FWGS is a custom Gold Source engine rewritten from scratch.
+  Xash3DFWGS ported to snap
   
 grade: devel
 confinement: devmode
@@ -21,14 +21,16 @@ parts:
     build-packages:
       - build-essential
       - python
-      - libsdl2-dev:i386
-      - libfontconfig-dev:i386
-      - libfreetype6-dev:i386
+      - libsdl2-dev
+      - libfontconfig-dev
+      - libfreetype6-dev
+    architecture: [amd64, i386]
 
     stage-packages:
-      - libsdl2-2.0-0:i386
-      - libfontconfig1:i386
-      - libfreetype6:i386
+      - libsdl2-2.0-0
+      - libfontconfig1
+      - libfreetype6
+    architecture: [amd64, i386]
 
 apps:
   xash:
