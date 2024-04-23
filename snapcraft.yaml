@@ -28,6 +28,9 @@ parts:
       ./waf configure -T release
       ./waf build
 
+    build-packages:
+      - gcc-multilib            # Additional package needed for 32-bit compatibility
+
     stage-packages:
       - libsdl2-2.0-0
       - libfontconfig1
