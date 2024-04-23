@@ -8,6 +8,16 @@ grade: devel
 confinement: devmode
 
 parts:
+  build:
+    plugin: nil
+    build-packages:
+      - build-essential
+      - python
+      - libsdl2-dev
+      - libfontconfig-dev
+      - libfreetype6-dev
+      - gcc-multilib            # Additional package needed for 32-bit compatibility
+
   xash:
     plugin: nil
     source: https://github.com/FWGS/xash3d-fwgs.git
@@ -17,14 +27,6 @@ parts:
       cd $SNAPCRAFT_PART_SRC
       ./waf configure -T release
       ./waf build
-
-    build-packages:
-      - build-essential
-      - python
-      - libsdl2-dev
-      - libfontconfig-dev
-      - libfreetype6-dev
-      - gcc-multilib            # Additional package needed for 32-bit compatibility
 
     stage-packages:
       - libsdl2-2.0-0
