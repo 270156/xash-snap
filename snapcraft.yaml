@@ -17,6 +17,7 @@ parts:
       - libfontconfig-dev
       - libfreetype6-dev
       - gcc-multilib            # Additional package needed for 32-bit compatibility
+      - g++                     # Adding the C++ compiler package
 
   xash:
     plugin: nil
