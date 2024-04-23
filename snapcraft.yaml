@@ -25,6 +25,7 @@ parts:
     source-depth: 1
     override-build: |
       export PKG_CONFIG_PATH=/usr/lib/i386-linux-gnu/pkgconfig
+      export CXX=/usr/bin/g++
       cd $SNAPCRAFT_PART_SRC
       ./waf configure -T release
       ./waf build
