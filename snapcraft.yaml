@@ -20,6 +20,8 @@ parts:
       - g++
     override-build: |
       cd $SNAPCRAFT_PART_SRC
+      wget https://waf.io/waf-2.0.22 -O waf
+      chmod +x waf
       export PKG_CONFIG_PATH=/usr/lib/i386-linux-gnu/pkgconfig
       if [ "$(arch)" = "x86_64" ]; then
           ./waf configure -T release -8
