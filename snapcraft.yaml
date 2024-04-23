@@ -19,4 +19,4 @@ parts:
   xash:
     source: https://github.com/FWGS/xash3d-fwgs.git
     source-tag: continuous-uncrustify
-    plugin: python3
+    plugin: cmake
