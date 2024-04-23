@@ -30,6 +30,7 @@ parts:
       ./waf build
 
     build-packages:
+      - g++                     # Adding the C++ compiler package
       - gcc-multilib            # Additional package needed for 32-bit compatibility
 
     stage-packages:
