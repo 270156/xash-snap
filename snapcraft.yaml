@@ -24,13 +24,23 @@ parts:
       - libsdl2-dev
       - libfontconfig-dev
       - libfreetype6-dev
-    architecture: [amd64, i386]
+      - gcc-multilib            # Additional package needed for 32-bit compatibility
 
     stage-packages:
       - libsdl2-2.0-0
       - libfontconfig1
       - libfreetype6
-    architecture: [amd64, i386]
+      - gcc-multilib            # Additional package needed for 32-bit compatibility
+
+    after: [build]
+    override-prime: |
+      snapcraftctl prime
+      if [ "$(arch)" = "x86_64" ]; then
+          apt-get download libsdl2-2.0-0:i386 libfontconfig1:i386 libfreetype6:i386
+          dpkg -x libsdl2-2.0-0_*.deb $SNAPCRAFT_PART_INSTALL/usr/lib/i386-linux-gnu/
+          dpkg -x libfontconfig1_*.deb $SNAPCRAFT_PART_INSTALL/usr/lib/i386-linux-gnu/
+          dpkg -x libfreetype6_*.deb $SNAPCRAFT_PART_INSTALL/usr/lib/i386-linux-gnu/
+      fi
 
 apps:
   xash:
