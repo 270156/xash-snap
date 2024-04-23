@@ -1,35 +1,36 @@
 name: xash
-base: core20
 version: '1.0'
-grade: stable
-confinement: strict
 summary: xash ported to snapcraft
 description: |
-  Xash3D FWGS ported to Snapcraft.
-
-apps:
-  xash:
-    command: bin/xash3d
+  XashFWGS ported to snapcraft
+  
+grade: devel
+confinement: devmode
 
 parts:
   xash:
     plugin: nil
-    source: https://github.com/FWGS/xash3d-fwgs.git
-    source-tag: continuous-uncrustify
-    build-packages:
-      - build-essential
-      - gcc-multilib
-      - g++-multilib
-      - python
-      - libsdl2-dev
-      - libfontconfig-dev
-      - libfreetype6-dev
-    stage-packages:
-      - libsdl2-2.0-0
-      - libfontconfig1
-      - libfreetype6
+    source: https://github.com/FWGS/xash3d-fwgs
+    source-depth: 1
     override-build: |
-      # Override the build step to use the Waf build system
+      export PKG_CONFIG_PATH=/usr/lib/i386-linux-gnu/pkgconfig
       cd $SNAPCRAFT_PART_SRC
       ./waf configure -T release
       ./waf build
+
+    build-packages:
+      - build-essential
+      - python
+      - libsdl2-dev:i386
+      - libfontconfig-dev:i386
+      - libfreetype6-dev:i386
+
+    stage-packages:
+      - libsdl2-2.0-0:i386
+      - libfontconfig1:i386
+      - libfreetype6:i386
+
+apps:
+  xash:
+    command: bin/xash3d
+    plugs: [network, home, opengl]
