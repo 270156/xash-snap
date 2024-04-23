@@ -10,7 +10,7 @@ confinement: devmode
 parts:
   xash:
     plugin: nil
-    source: https://github.com/FWGS/xash3d-fwgs
+    source: https://github.com/FWGS/xash3d-fwgs.git
     source-depth: 1
     override-build: |
       export PKG_CONFIG_PATH=/usr/lib/i386-linux-gnu/pkgconfig
