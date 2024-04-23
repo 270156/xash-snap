@@ -3,7 +3,7 @@ version: '1.0'
 summary: xash ported to snap
 description: |
   Xash3DFWGS ported to snap
-  
+
 grade: devel
 confinement: devmode
 
@@ -18,28 +18,28 @@ parts:
       - libfreetype6-dev
       - gcc-multilib
       - g++
+    override-build: |
+      cd $SNAPCRAFT_PART_SRC
+      export PKG_CONFIG_PATH=/usr/lib/i386-linux-gnu/pkgconfig
+      if [ "$(arch)" = "x86_64" ]; then
+          ./waf configure -T release -8
+      else
+          ./waf configure -T release
+      fi
+      ./waf build
 
   xash:
     plugin: nil
     source: https://github.com/FWGS/xash3d-fwgs.git
     source-depth: 1
-    override-build: |
-      export PKG_CONFIG_PATH=/usr/lib/i386-linux-gnu/pkgconfig
-      export CXX=/usr/bin/g++
-      cd $SNAPCRAFT_PART_SRC
-      ./waf configure -T release
-      ./waf build
-
     build-packages:
       - g++
       - gcc-multilib
-
     stage-packages:
       - libsdl2-2.0-0
       - libfontconfig1
       - libfreetype6
       - gcc-multilib
-
     after: [build]
     override-prime: |
       snapcraftctl prime
