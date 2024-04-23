@@ -2,14 +2,10 @@ name: xash
 base: core20
 version: '1.0'
 grade: stable
-confinement: devmode
+confinement: strict
 summary: xash ported to snapcraft
 description: |
-  xash ported to snapcraft
-architectures: 
-  - build-on: amd64
-  - build-on: arm64
-  - build-on: armhf
+  Xash3D FWGS ported to Snapcraft.
 
 apps:
   xash:
@@ -17,6 +13,23 @@ apps:
 
 parts:
   xash:
+    plugin: nil
     source: https://github.com/FWGS/xash3d-fwgs.git
     source-tag: continuous-uncrustify
-    plugin: cmake
+    build-packages:
+      - build-essential
+      - gcc-multilib
+      - g++-multilib
+      - python
+      - libsdl2-dev:i386
+      - libfontconfig-dev:i386
+      - libfreetype6-dev:i386
+    stage-packages:
+      - libsdl2-2.0-0:i386
+      - libfontconfig1:i386
+      - libfreetype6:i386
+    override-build: |
+      # Override the build step to use the Waf build system
+      cd $SNAPCRAFT_PART_SRC
+      ./waf configure -T release
+      ./waf build
