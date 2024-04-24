@@ -10,6 +10,8 @@ confinement: devmode
 parts:
   build:
     plugin: nil
+    source: https://waf.io/waf-2.0.27.tar.bz2
+    source-depth: 1
     build-packages:
       - build-essential
       - python
@@ -18,14 +20,8 @@ parts:
       - libfreetype6-dev
       - gcc-multilib
       - g++
+      - waf
       - wget
-
-  waf:
-    plugin: python
-    source: https://waf.io/waf-light-2.0.27.tar.bz2
-    source-type: tar
-    override-build: |
-      python waf-light
 
   xash:
     plugin: nil
@@ -48,7 +44,7 @@ parts:
       - libfreetype6
       - gcc-multilib
 
-    after: [waf]
+    after: [build]
     override-prime: |
       snapcraftctl prime
       if [ "$(arch)" = "x86_64" ]; then
